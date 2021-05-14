@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
+{% block body %}
+<style>
+    div{margin:10px;
+        padding-left :200px;
+        padding-right:200px;
+         }
+   form,form_label{
+        font-size:20px;
+       
+         
+    }
+</style> 
+<div>
+<h1>Information de la demande</h1>
+</div>
+{{form_start(form)}}
+
+
+
+<div>
+{{ form_label(form.titre) }}
+
+{{ form_widget(form.titre, {'attr': {'placeholder': 'Entrer un titre'}}) }}
+</div>
+
+<div>
+{{ form_label(form.budget) }}
+
+{{ form_widget(form.budget, {'attr': {'placeholder': 'Taper le budget souhaité'}}) }}
+</div>
+
+<div>
+{{ form_label(form.diplome) }}
+
+{{ form_widget(form.diplome, {'attr': {'placeholder': 'entrer les diplomes que vous avez'}}) }}
+</div>
+
+<div>
+{{ form_label(form.technologie) }}
+
+{{ form_widget(form.technologie, {'attr': {'placeholder': 'Taper les technologies que vous maitrisez'}}) }}
+</div>
+<div>
+{{ form_label(form.langue) }}
+
+{{ form_widget(form.langue, {'attr': {'placeholder': 'Taper les langues que vous maitrisez'}}) }}
+</div>
+
+
+<div>
+<input type="submit" name="" value="Envoyer" class="btn btn-primary">
+</div>
+
+{{form_end(form)}}
+
+{% endblock body %}

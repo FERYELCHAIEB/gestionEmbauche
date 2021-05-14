@@ -16,21 +16,21 @@ class CandidatController extends AbstractController
     /**
      * @Route("/candidat", name="candidat")
      */
-    public function index(): Response
+    public function index(): Response 
     {$candidat = $this->getDoctrine()->getRepository(Candidat::class)->findAll();
         return $this->render('candidat/index.html.twig', [
             'candidat' => $candidat,
         ]);
     }
      /**
-          * @Route("/agence/candidat/{id}", name="supprimerCandidat")
+          * @Route("/supprimer/candidat/{id}", name="supprimerCandidat")
      */
     public function supprimer(int $id):Response
     {  $entityManager = $this->getDoctrine()->getManager();
         $candidat = $this->getDoctrine()->getRepository(Candidat::class)->findBy(array('id'=>$id));
         if(! $candidat){
             throw $this->createNotFoundExpectation(
-                'pas de voiture avec cet id|'.$id
+                'pas de candidat avec cet id|'.$id
             );
         }
         $entityManager->remove($candidat[0]);
