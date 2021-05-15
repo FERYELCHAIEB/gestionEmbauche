@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}index{% endblock %}
+
+{% block body %}
+<style>
+    
+</style>
+<hr>
+<h1>Les offres</h1>
+
+
+<h6><a href={{path('createOffre')}}>Ajouter</a></h6>
+<table class='table'>
+<thead class="thead-dark">
+<tr>
+  
+    <th scope="col">ID</th>
+    <th scope="col">Titre</th>
+    <th scope="col">Langues</th>
+    <th scope="col">Diplome</th>
+    <th scope="col">Technologie</th>
+    <th scope="col">Expérience minimale</th>
+    <th scope="col">Expérience minimale</th>
+    <th scope="col">Nombre heures</th>
+    <th scope="col">Etat</th>
+    <th scope="col">Actions</th>
+</thead>
+    <tbody>
+    {% for offre in offres %} 
+  <tr>
+    <td>{{offre.id}}</td>
+    <td>{{offre.titre}}</td>
+    <td>{{offre.langue}}</td>
+    <td>{{offre.diplome}}</td>
+    <td>{{offre.technologies}}</td>
+    <td>{{offre.expmin}}</td>
+    <td>{{offre.expmax}}</td>
+    <td>{{offre.nbheures}}</td>
+    <td>{{offre.etat}}</td>
+    <td><a href={{path('afficheOffreById',{'id':offre.id})}}> Consulter </a>
+    <a href={{path('modifierOffre',{'id':offre.id})}}>Modifier</a>
+    <a href={{path('supprimerOffre',{'id':offre.id})}}> Supprimer </a>
+    <a href={{path('changerEtat',{'id':offre.id})}}> Indisponible </a>
+
+    </td>
+    </tr>
+{% endfor %}
+</table>
+</tbody>
+{% endblock %}

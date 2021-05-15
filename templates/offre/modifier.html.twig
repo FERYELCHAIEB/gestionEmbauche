@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
+{% block body %}
+<style>
+    div{margin:10px;
+        padding-left :200px;
+        padding-right:200px;
+         }
+   form,form_label{
+        font-size:20px;
+    }
+</style>
+<div>
+<h1>Modifier cet offre d'emploi</h1>
+</div>
+{{form_start(form)}}
+<div>
+{{ form_label(form.titre) }}
+</div>
+<div>
+{{ form_widget(form.titre, {'attr': {'placeholder': 'titre'}}) }}
+</div>
+<div>
+{{ form_label(form.langue) }}
+</div>
+<div>
+{{ form_widget(form.langue, {'attr': {'placeholder': 'langue'}}) }}
+{{form_errors(form.langue)}}
+</div>
+<div>
+{{ form_label(form.diplome) }}
+</div>
+<div>
+{{ form_widget(form.diplome, {'attr': {'placeholder': 'diplome'}}) }}
+</div>
+<div>
+{{ form_label(form.technologies) }}
+</div>
+<div>
+{{ form_widget(form.technologies, {'attr': {'placeholder': 'technologies'}}) }}
+</div>
+<div>
+{{ form_label(form.expmin) }}
+</div>
+<div>
+{{ form_widget(form.expmin, {'attr': {'placeholder': 'experience minimale'}}) }}
+</div>
+<div>
+{{ form_label(form.expmax) }}
+</div>
+<div>
+{{ form_widget(form.expmax, {'attr': {'placeholder': 'experience maximale'}}) }}
+</div>
+<div>
+{{ form_label(form.nbheures) }}
+</div>
+<div>
+{{ form_widget(form.nbheures, {'attr': {'placeholder': 'nombre des heures'}}) }}
+</div>
+<div>
+<input type="submit" name="" value="Modifier" class="btn btn-primary">
+</div>
+
+{{form_end(form)}}
+<div>
+<button type="button" class="btn btn-light"><a href={{path('consulterOffre')}}>Back</a></button>
+</div>
+{% endblock body %}

@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello VoitureController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+    <div class="example-wrapper">
+    <h1>Informations d'une offre d'emploi</h1>
+<ul>
+{% for offre in offres %}
+<li> ID : {{ offre.id|e }} </li>
+<li> Titre Offre : {{offre.titre|e }} </li>
+<li> Diplome demandé : {{offre.diplome|e }} </li>
+<li> Technologies utilisées : {{offre.technologies|e }} </li>
+<li> Expérience minimale : {{offre.expmin|e }} </li>
+<li> Expérience maximale : {{offre.expmax|e }} </li>
+<li> nombre des heures : {{ offre.nbheures|e }} </li>
+{% endfor %}
+<div>
+<button type="button" class="btn btn-light"><a href={{path('consulterOffre')}}>Back</a></button>
+</div>
+</ul>
+</div> 
+{% endblock %}
