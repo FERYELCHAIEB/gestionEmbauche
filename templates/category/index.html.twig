@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello VoitureController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+    <div class="example-wrapper">
+    <h1>Informations d'une catégorie</h1>
+<ul>
+{% for categorie in categories %}
+<li> ID : {{ categorie.id|e }} </li>
+<li> Nom Catégorie : {{categorie.nom|e }} </li>
+<li> Description Catégorie : {{categorie.description|e }} </li>
+{% endfor %}
+<div>
+<button type="button" class="btn btn-light"><a href={{path('consulterCategorie')}}>Back</a></button>
+</div>
+</ul>
+</div> 
+{% endblock %}

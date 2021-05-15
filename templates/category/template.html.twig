@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}index{% endblock %}
+
+{% block body %}
+<style>
+    
+</style>
+<hr>
+<h1>Les catégories</h1>
+
+
+<h6><a href={{path('createCategorie')}}>Ajouter</a></h6>
+<table class='table'>
+<thead class="thead-dark">
+<tr>
+  
+    <th scope="col">ID</th>
+    <th scope="col">Nom</th>
+    <th scope="col">Description</th>
+    <th scope="col">Actions</th>
+</thead>
+    <tbody>
+    {% for categorie in categories %} 
+  <tr>
+    <td>{{categorie.id}}</td>
+    <td>{{categorie.nom}}</td>
+    <td>{{categorie.description}}</td>
+    <td><a href={{path('afficheCategorieById',{'id':categorie.id})}}> Consulter </a>
+    <a href={{path('modifierCategorie',{'id':categorie.id})}}>Modifier</a>
+    <a href={{path('supprimerCategorie',{'id':categorie.id})}}> Supprimer </a>
+    </td>
+    </tr>
+{% endfor %}
+</table>
+</tbody>
+{% endblock %}

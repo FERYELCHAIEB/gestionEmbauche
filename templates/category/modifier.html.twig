@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
+{% block body %}
+<style>
+    div{margin:10px;
+        padding-left :200px;
+        padding-right:200px;
+         }
+   form,form_label{
+        font-size:20px;
+    }
+</style>
+<div>
+<h1>Modifier cette catégorie</h1>
+</div>
+{{form_start(form)}}
+<div>
+{{ form_label(form.nom) }}
+</div>
+<div>
+{{ form_widget(form.nom, {'attr': {'placeholder': 'nom de la catégorie'}}) }}
+{{form_errors(form.description)}}
+</div>
+<div>
+{{ form_label(form.description) }}
+</div>
+<div>
+{{ form_widget(form.description, {'attr': {'placeholder': 'decription de la catégorie'}}) }}
+</div>
+<div>
+<input type="submit" name="" value="Modifier" class="btn btn-primary">
+</div>
+{{form_end(form)}}
+<div>
+<button type="button" class="btn btn-light"><a href={{path('consulterCategorie')}}>Back</a></button>
+</div>
+{% endblock body %}
