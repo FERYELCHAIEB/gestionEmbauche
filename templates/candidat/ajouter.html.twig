@@ -1,53 +1,27 @@
 {% extends 'base.html.twig' %}
-{% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
+{% form_theme InscriptionForm 'bootstrap_4_horizontal_layout.html.twig' %}
 {% block body %}
 <style>
     div{margin:10px;
         padding-left :200px;
         padding-right:200px;
          }
-   form,form_label{
-        font-size:20px;
-       
-         
-    }
+ 
 </style> 
 <div>
-<h1>Créer Compte</h1>
-</div>
-{{form_start(form)}}
+<h1>Créer votre compte</h1>
 
+    {{ form_start(InscriptionForm) }}
+    {{ form_row(InscriptionForm.nom) }}
+    {{ form_row(InscriptionForm.prenom) }}
 
+    {{ form_row(InscriptionForm.dateDeNaissance) }}
+        {{ form_row(InscriptionForm.email) }}
+        {{ form_row(InscriptionForm.plainPassword, {
+            label: 'Password'
+        }) }}
+        {{ form_row(InscriptionForm.agreeTerms) }}
 
-<div>
-{{ form_label(form.nom) }}
-
-{{ form_widget(form.nom, {'attr': {'placeholder': 'Taper votre nom'}}) }}
-</div>
-
-<div>
-{{ form_label(form.prenom) }}
-
-{{ form_widget(form.prenom, {'attr': {'placeholder': 'Taper votre prenom'}}) }}
-</div>
-
-<div>
-{{ form_label(form.email) }}
-
-{{ form_widget(form.email, {'attr': {'placeholder': 'Taper votre email'}}) }}
-</div>
-
-<div>
-{{ form_label(form.password) }}
-
-{{ form_widget(form.password, {'attr': {'placeholder': 'Taper votre mot de passe'}}) }}
-</div>
-
-
-<div>
-<input type="submit" name="" value="Envoyer" class="btn btn-primary">
-</div>
-
-{{form_end(form)}}
-
-{% endblock body %}
+        <button type="submit" class="btn btn-primary">Enregister</button>
+    {{ form_end(InscriptionForm) }}
+{% endblock %}

@@ -1,20 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %}Hello AdminController!{% endblock %} 
 
 {% block body %}
 <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-      table,thead,tbody,th,td,tr{
-     border: solid;
-      border-collapse: collapse;
-      padding : 20px 20px 20px 20px;
-      collapse :collapse;
+     table{
+       font-size:20px;
+     }
+       .dex{
+         margin-left:790px;
        }
 </style>
+<nav class="navbar navbar-expand-lg navbar-primary bg-dark">
+  <a class="navbar-brand" href="#">Mon Profil</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href={{path('candidatProfil')}}>Acceuil <span class="sr-only">(current)</span></a>
+     <a class="nav-item nav-link" href="#">Offres d'emplois</a>
+      <a class="nav-item nav-link" href="#">Demande</a>
+      <a class="nav-item nav-link dex" href={{path('app_logout')}}>Deconnexion</a>
+      
+    </div>
+  </div>
+</nav>
 <h1>Liste des demandes effectuées<h1>
-<table class="table table-success">
+<table class="table table-primary">
   <thead>
     <tr>
       <th scope="col">#</th>

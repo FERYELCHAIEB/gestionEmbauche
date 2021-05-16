@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
+{% block body %}
+<style>
+    div{margin:10px; 
+        padding-left :200px;
+        padding-right:200px;
+         }
+   form,form_label{
+        font-size:20px;
+        color:blue;
+        
+    }
+</style>
+<div>
+<h1>Users</h1>
+</div>
+{{form_start(form)}}
+
+
+
+<div>
+{{ form_label(form.nom) }}
+{{ form_widget(form.nom) }}
+</div>
+
+<div>
+{{ form_label(form.prenom) }}
+{{ form_widget(form.prenom) }}
+
+</div>
+<div>
+{{ form_label(form.email) }}
+
+{{ form_widget(form.email) }}
+</div>
+
+
+
+<div>
+<input type="submit" name="" value="Enregistrer" class="btn btn-primary">
+</div>
+
+{{form_end(form)}}
+{#<div>
+<button type="button" class="btn btn-light" ><a href={{path('admin')}}>back</a></button>
+</div>#}
+{% endblock body %}
