@@ -10,6 +10,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Entity\Candidate;
+use App\Entity\Offre;
 use App\Form\CandidatType; 
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class CandidatController extends AbstractController
@@ -92,7 +93,24 @@ class CandidatController extends AbstractController
             'InscriptionForm' => $form->createView(),
         ]);
     }
-    
-    
+    /**
+     * @Route("/home/offreEmploi", name="offreEmploiCandidat")
+     */
+    public function offre(): Response 
+    {$offres = $this->getDoctrine()->getRepository(Offre::class)->findAll();
+        return $this->render('candidat/offre.html.twig', [
+            'offres' => $offres,
+        ]);
+    }   
+    /**
+     * @Route("/home/offreEmploi/{id}", name="offreCandidatById")
+     */
+    public function afficheroffre(int $id): Response
+    {  
+        $offres = $this->getDoctrine()->getRepository(Offre::class)->findBy(array('id'=>$id));
+        return $this->render('candidat/detailsoffre.html.twig', [
+            'offres' => $offres,
+        ]);
+    } 
 
 }
