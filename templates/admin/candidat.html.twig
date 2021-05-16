@@ -12,8 +12,15 @@
        .dex{
          margin-left:790px;
        } 
+        a{
+         color:white;
+       }
+       .fa{
+         font-size:20px;
+         padding: 8px 8px;
+       }
 </style>
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="#">Admin</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -37,10 +44,11 @@
 </nav>
 <br/>
 <h1>Liste des candidats à valider<h1>
-<table class="table table-primary">
-  <thead>
+<br/>
+<table class="table">
+  <thead class="table-dark">
     <tr>
-      <th scope="col">#</th>
+      <th scope="col">ID</th>
       <th scope="col">Nom</th>
       <th scope="col">Prenom</th>
       <th scope="col">Email</th>
@@ -48,7 +56,7 @@
       <th scope="col">Action</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody class="table-secondary">
     {% for candid in candidats %} 
     <tr>
     <td>{{candid.id}}</td>
@@ -56,7 +64,7 @@
     <td>{{candid.prenom}}</td>
     <td>{{candid.email}}</td>
    
-    <td><button type="button" class="btn btn-danger" ><a href={{path('supprimerCandidat',{'id':candid.id})}}>Supprimer</a></button> </td>
+    <td><button type="button" class="btn btn-danger" ><a href={{path('supprimerCandidat',{'id':candid.id})}}><i class="fa fa-trash" aria-hidden="true"></i></a></button> </td>
     </tr>
     {% endfor %}
   </tbody>
