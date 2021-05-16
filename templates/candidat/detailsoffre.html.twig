@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}index{% endblock %}
+
+{% block body %}
+<style>
+    
+</style>
+<hr>
+  {% for offre in offres %} 
+
+<h1>Détails sur l'offre de {{offre.titre}} </h1>
+<h5>Si vous êtes intêressant à cet offre, merci de postuler :)</h5>
+  {% endfor %}
+<hr>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Attributs</th>
+      <th scope="col">Infos</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+  {% for offre in offres %} 
+    <tr>
+      <th scope="row">Diplome</th>
+      <td>{{offre.diplome}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Technologies</th>
+      <td>{{offre.technologies}}</td>
+    </tr>
+    <tr>
+      <th scope="row">Langues</th>
+      <td>{{offre.langue}}</td>  
+    </tr>
+    <tr>
+      <th scope="row">Exp minimale</th>
+      <td>{{offre.expmin}} Ans</td>  
+    </tr>
+    <tr>
+      <th scope="row">Exp maximale</th>
+      <td>{{offre.expmax}} Ans</td>  
+    </tr>
+    <tr>
+      <th scope="row">heures</th>
+      <td>{{offre.nbheures}} Heures</td>  
+    </tr>
+    <tr>
+      <th scope="row">Etat</th>
+      <td>Disponible</td>  
+    </tr>
+  </tbody>
+  {% endfor %}
+</table>
+<div>
+<hr>
+<input type="submit" value="Postuler" class="btn btn-primary"<a href={{path('offreEmploiCandidat')}}></a>
+</div>
+<div>
+<button type="button" class="btn btn-light"><a href={{path('offreEmploiCandidat')}}>Retour</a></button>
+</div>
+</tbody>
+{% endblock %}
