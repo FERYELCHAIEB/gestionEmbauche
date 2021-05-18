@@ -58,8 +58,14 @@
 {{ form_widget(form.nbheures, {'attr': {'placeholder': 'nombre des heures'}}) }}
 </div>
 <div>
+{{ form_label(form.categorie) }}
+{{ form_widget(form.categorie) }}
+</div>
+<div>
 {{ form_label(form.etat) }}
 </div>
+
+
 <div>
 {{ form_widget(form.etat, {'attr': {'placeholder': 'état'}}) }}
 </div>

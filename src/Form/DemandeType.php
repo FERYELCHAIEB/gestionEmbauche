@@ -8,7 +8,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-
+use Symfony\Form\CategoryType;
+use App\Entity\Categorie;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 class DemandeType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -19,6 +21,8 @@ class DemandeType extends AbstractType
             ->add('diplome',TextType::class)
             ->add('technologie',TextType::class) 
             ->add('langue',TextType::class)
+            ->add('categorie',EntityType::class,['class' => Categorie::class,
+                                            'choice_label' => 'nom'  ])
         ;
     }
 
