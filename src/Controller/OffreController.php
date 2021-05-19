@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Offre;
+use App\Entity\Categorie;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Form\OffreType;
@@ -67,7 +68,7 @@ class OffreController extends AbstractController
         $offre = $this->getDoctrine()->getRepository(Offre::class)->findBy(array('id'=>$id));
         if(! $offre){
             throw $this->createNotFoundExpectation(
-                'pas de offre avec la marticule|'.$id
+                'pas de offre avec id|'.$id
             );
         }
         $entityManager->remove($offre[0]);
@@ -78,12 +79,15 @@ class OffreController extends AbstractController
      * @Route("/createOffre", name="createOffre")
      */
     public function createOffre( Request $request ):Response
-    {   
+    {   $category= new Categorie();
+       
         $offre = new Offre();
         $form= $this->createForm(OffreType::class, $offre);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $offre->setEtat(1);
+            $category =$form->getData();
+            
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($offre);
             $entityManager->flush();

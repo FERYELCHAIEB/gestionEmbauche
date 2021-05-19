@@ -4,7 +4,13 @@
 
 {% block body %}
 <style>
-    
+    a{
+         color:white;
+       }
+       .fa{
+         font-size:20px;
+         padding: 8px 8px;
+       } 
 </style>
 <hr> 
 <h1>Les offres</h1>
@@ -24,7 +30,9 @@
     <th scope="col">Expérience minimale</th>
     <th scope="col">Nombre heures</th>
     <th scope="col">Etat</th>
+    <th scope="col">Categorie</th>
     <th scope="col">Actions</th>
+    
 </thead>
     <tbody>
     {% for offre in offres %} 
@@ -38,10 +46,11 @@
     <td>{{offre.expmax}}</td>
     <td>{{offre.nbheures}}</td>
     <td>{{offre.etat}}</td>
-    <td><a href={{path('afficheOffreById',{'id':offre.id})}}> Consulter </a>
-    <a href={{path('modifierOffre',{'id':offre.id})}}>Modifier</a>
-    <a href={{path('supprimerOffre',{'id':offre.id})}}> Supprimer </a>
-    <a href={{path('changerEtat',{'id':offre.id})}}> Indisponible </a>
+    <td>{{offre.categorie.nom}}</td>
+    <td><button type="button" class="btn btn-success" ><a href={{path('afficheOffreById',{'id':offre.id})}}><i class="fa fa-eye" aria-hidden="true"></i> </a></button>
+  <button type="button" class="btn btn-info" >  <a href={{path('modifierOffre',{'id':offre.id})}}><i class="fa fa-pencil" aria-hidden="true"></i> </a></button>
+    <button type="button" class="btn btn-danger" ><a href={{path('supprimerOffre',{'id':offre.id})}}><i class="fa fa-trash" aria-hidden="true"></i> </a></button>
+   <button type="button" class="btn btn-warning" > <a href={{path('changerEtat',{'id':offre.id})}}><i class="fa fa-times" aria-hidden="true"></i> </a></button>
 
     </td>
     </tr>

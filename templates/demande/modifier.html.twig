@@ -1,0 +1,58 @@
+ {% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
+{% block body %}
+<style>
+    div{margin:10px;
+        padding-left :200px;
+        padding-right:200px;
+         }
+   form,form_label{
+        font-size:20px;
+    }
+</style>
+<div>
+<h1>Modifier cette Demande</h1>
+</div>
+{{form_start(form)}}
+<div>
+{{ form_label(form.titre) }}
+</div>
+<div>
+{{ form_widget(form.titre, {'attr': {'placeholder': 'titre'}}) }}
+</div>
+<div>
+{{ form_label(form.budget) }}
+</div>
+<div>
+{{ form_widget(form.budget, {'attr': {'placeholder': 'budgets'}}) }}
+</div>
+<div>
+{{ form_label(form.langue) }}
+</div>
+<div>
+{{ form_widget(form.langue, {'attr': {'placeholder': 'langue'}}) }}
+{{form_errors(form.langue)}}
+</div>
+<div>
+{{ form_label(form.diplome) }}
+</div>
+<div>
+{{ form_widget(form.diplome, {'attr': {'placeholder': 'diplome'}}) }}
+</div>
+<div>
+{{ form_label(form.technologie) }}
+</div>
+<div>
+{{ form_widget(form.technologie, {'attr': {'placeholder': 'technologies'}}) }}
+</div>
+
+
+<div>
+<input type="submit" name="" value="Modifier" class="btn btn-primary">
+</div>
+
+{{form_end(form)}}
+<div>
+<button type="button" class="btn btn-light"><a href={{path('demande')}}>Retour</a></button>
+</div>
+{% endblock body %}
