@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -50,6 +52,18 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=150, nullable=true)
      */
     private $validation;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Offre::class, mappedBy="users",cascade= {"persist", "remove"})
+     */
+    private $offres;
+
+    
+
+    public function __construct()
+    {
+        $this->offres = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -167,4 +181,36 @@ class User implements UserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection|Offre[]
+     */
+    public function getOffres(): Collection
+    {
+        return $this->offres;
+    }
+
+    public function addOffre(Offre $offre): self
+    {
+        if (!$this->offres->contains($offre)) {
+            $this->offres[] = $offre;
+            $offre->setUsers($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffre(Offre $offre): self
+    {
+        if ($this->offres->removeElement($offre)) {
+            // set the owning side to null (unless already changed)
+            if ($offre->getUsers() === $this) {
+                $offre->setUsers(null);
+            }
+        }
+
+        return $this;
+    }
+
+   
 }
