@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Entity;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\CandidateRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -48,6 +50,22 @@ class Candidate implements UserInterface
      * @ORM\Column(type="date", nullable=true)
      */
     private $dateDeNaissance;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Demande::class, mappedBy="candid",cascade= {"persist", "remove"})
+     */
+    private $demandes;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Offre::class, mappedBy="candidats")
+     */
+    private $offres;
+
+    public function __construct()
+    {
+        $this->demandes = new ArrayCollection();
+        $this->offres = new ArrayCollection();
+    }
 
     
 
@@ -164,6 +182,63 @@ class Candidate implements UserInterface
     public function setDateDeNaissance(?\DateTimeInterface $dateDeNaissance): self
     {
         $this->dateDeNaissance = $dateDeNaissance;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Demande[]
+     */
+    public function getDemandes(): Collection
+    {
+        return $this->demandes;
+    }
+
+    public function addDemande(Demande $demande): self
+    {
+        if (!$this->demandes->contains($demande)) {
+            $this->demandes[] = $demande;
+            $demande->setCandid($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDemande(Demande $demande): self
+    {
+        if ($this->demandes->removeElement($demande)) {
+            // set the owning side to null (unless already changed)
+            if ($demande->getCandid() === $this) {
+                $demande->setCandid(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Offre[]
+     */
+    public function getOffres(): Collection
+    {
+        return $this->offres;
+    }
+
+    public function addOffre(Offre $offre): self
+    {
+        if (!$this->offres->contains($offre)) {
+            $this->offres[] = $offre;
+            $offre->addCandidat($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffre(Offre $offre): self
+    {
+        if ($this->offres->removeElement($offre)) {
+            $offre->removeCandidat($this);
+        }
 
         return $this;
     }

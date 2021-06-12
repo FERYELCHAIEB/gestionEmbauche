@@ -50,6 +50,14 @@ class Demande
      */
     private $categorie;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Candidate::class, inversedBy="demandes",cascade= {"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $candid;
+
+    
+
     public function getId(): ?int
     {
         return $this->id;
@@ -126,4 +134,18 @@ class Demande
 
         return $this;
     }
+
+    public function getCandid(): ?Candidate
+    {
+        return $this->candid;
+    }
+
+    public function setCandid(?Candidate $candid): self
+    {
+        $this->candid = $candid;
+
+        return $this;
+    }
+
+    
 }

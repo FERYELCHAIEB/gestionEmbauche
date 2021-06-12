@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\OffreRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -62,6 +64,24 @@ class Offre
      * @ORM\JoinColumn(nullable=false)
      */
     private $categorie;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="offres",cascade= {"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $users;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Candidate::class, inversedBy="offres")
+     */
+    private $candidats;
+
+    public function __construct()
+    {
+        $this->candidats = new ArrayCollection();
+    }
+
+    
 
     public function getId(): ?int
     {
@@ -175,4 +195,42 @@ class Offre
 
         return $this;
     }
+
+    public function getUsers(): ?User
+    {
+        return $this->users;
+    }
+
+    public function setUsers(?User $users): self
+    {
+        $this->users = $users;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Candidate[]
+     */
+    public function getCandidats(): Collection
+    {
+        return $this->candidats;
+    }
+
+    public function addCandidat(Candidate $candidat): self
+    {
+        if (!$this->candidats->contains($candidat)) {
+            $this->candidats[] = $candidat;
+        }
+
+        return $this;
+    }
+
+    public function removeCandidat(Candidate $candidat): self
+    {
+        $this->candidats->removeElement($candidat);
+
+        return $this;
+    }
+
+   
 }

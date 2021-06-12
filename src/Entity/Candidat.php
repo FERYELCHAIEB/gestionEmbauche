@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Entity;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\CandidatRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -45,6 +47,13 @@ class Candidat
      *  @Assert\NotBlank
      */
     private $password;
+
+   
+
+    public function __construct()
+    {
+        $this->demandes = new ArrayCollection();
+    }
 
   
 
@@ -99,6 +108,36 @@ class Candidat
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Demande[]
+     */
+    public function getDemandes(): Collection
+    {
+        return $this->demandes;
+    }
+
+    public function addDemande(Demande $demande): self
+    {
+        if (!$this->demandes->contains($demande)) {
+            $this->demandes[] = $demande;
+            $demande->setCandidats($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDemande(Demande $demande): self
+    {
+        if ($this->demandes->removeElement($demande)) {
+            // set the owning side to null (unless already changed)
+            if ($demande->getCandidats() === $this) {
+                $demande->setCandidats(null);
+            }
+        }
 
         return $this;
     }
